@@ -1,0 +1,21 @@
+#buttons-row{
+    margin-top: 2px;
+    background-color: lightslategray;
+    border: 2px solid gray;
+    height: 75px;
+}
+.button {
+    background-color: blue;
+    margin-left: 10px;
+}
+
+#inp-col{
+    margin-left: 15px;
+    margin-top: 15px;
+    float: left;
+}
+
+h3{
+    
+    float: left;
+}
