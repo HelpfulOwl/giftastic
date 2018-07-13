@@ -1,35 +1,71 @@
 $(document).ready(function() {
-var userInput;//This will be a dynamic input later.
-var APIkey = "xhIGew1HBOnADdrg3YwPT2hUaapAVUV4";
-var queryURL = "http://api.giphy.com/v1/gifs/search?q="+userInput+"&api_key="+APIkey;
+
+
 var choiceInput = ["pangolin","platypus","echidna","spider"];//each search input is placed into this array.
 
-//creates a button for each choice in the array.
 function buttonCreator(){
+    $("#buttons-col").empty();
     for(var i = 0; i<choiceInput.length; i++){
         $("#buttons-col").append("<button class ='button' data-name='"
         +choiceInput[i]+"'>"+choiceInput[i]+"</button>");   
     };
 };
 
-function userInput(){
-    userInput = $("#user-input").val().trim();
-    //creat input and set the input equal to userInput variable.
-    //userInput =
-};
-
-function APIcall(){
+function APIcall(word){
+    var APIkey = "xhIGew1HBOnADdrg3YwPT2hUaapAVUV4";
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q="+word+"&api_key="+APIkey+"&limit=10";
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
-        console.log(response);     
-    });
+    })
+    .then(function(response) {
+        $("#gifs-col").empty();
+        var response = response.data
+        console.log(response);
+        for (var i = 0; i<response.length; i++){
+            var animalImg = $('<img>');
+            animalImg.attr("class","gif");
+            animalImg.attr("data-still",response[i].images.fixed_height_still.url);
+            animalImg.attr("data-animate",response[i].images.fixed_height.url);
+            animalImg.attr("data-state", "still");
+            animalImg.attr("src",response[i].images.fixed_height_still.url);
+            // console.log(response[i].images.fixed_height_still.url);
+            $("#gifs-col").append(animalImg);
+        };
+    }); 
 };
 
 buttonCreator();
 
 
 
+$("#search").on("click", function(event) {
+    event.preventDefault();
+    var userInp = $("#user-input").val().trim();
+        choiceInput.push(userInp);
+        APIcall(userInp);
+        buttonCreator();
+        console.log(choiceInput);    
+});
+
+$("#gifs-col").on("click", ".gif", function(){  
+    console.log(this);
+    var state = $(this).attr("data-state");    
+    if (state === "still"){
+        $(this).attr("src",$(this).attr("data-animate"));
+        $(this).attr("data-state","animate");
+    } else if (state==="animate"){
+        $(this).attr("src",$(this).attr("data-still"));
+        $(this).attr("data-state","still");
+    }
+});
+
+$(".button").on("click", function(){
+    $("#gifs-col").empty();
+    var d = $(this).attr("data-name");
+    choiceInput.push(d);
+    console.log("D IS:",d);
+    APIcall();
+});
 
 });//closes document.ready

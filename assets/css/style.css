@@ -7,6 +7,7 @@
 .button {
     background-color: blue;
     margin-left: 10px;
+    color: white;
 }
 
 #inp-col{
@@ -18,4 +19,13 @@
 h3{
     
     float: left;
+}
+
+#user-input{
+    margin-left:5px;
+}
+
+.gif{
+    margin-left: 10px;
+    margin-top: 10px;
 }
