@@ -13,7 +13,7 @@ function buttonCreator(){
 
 function APIcall(word){
     var APIkey = "xhIGew1HBOnADdrg3YwPT2hUaapAVUV4";
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q="+word+"&api_key="+APIkey+"&limit=12";
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q="+word+"&api_key="+APIkey+"&limit=16";
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -61,7 +61,6 @@ $("#gifs-col").on("click", ".gif", function(){
 $(document).on("click", ".button", function(){
     $("#gifs-col").empty();
     var d = $(this).attr("data-name");
-    choiceInput.push(d);
     console.log("D IS:",d);
     APIcall(d);
 });
