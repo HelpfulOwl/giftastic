@@ -1,3 +1,6 @@
+body{
+    background-color: gainsboro;
+}
 #buttons-row{
     margin-top: 2px;
     background-color: lightslategray;
@@ -28,4 +31,11 @@ h3{
 .gif{
     margin-left: 10px;
     margin-top: 10px;
+    border:2px solid black;
+    width: 260px;
+    height: 200px;
+}
+
+#gifs-col{
+    margin-left: 100px;
 }

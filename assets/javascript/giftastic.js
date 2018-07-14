@@ -13,7 +13,7 @@ function buttonCreator(){
 
 function APIcall(word){
     var APIkey = "xhIGew1HBOnADdrg3YwPT2hUaapAVUV4";
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q="+word+"&api_key="+APIkey+"&limit=10";
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q="+word+"&api_key="+APIkey+"&limit=12";
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -37,10 +37,8 @@ function APIcall(word){
 
 buttonCreator();
 
-
-
-$("#search").on("click", function(event) {
-    event.preventDefault();
+$("#search").on("click", function() {
+   // event.preventDefault();
     var userInp = $("#user-input").val().trim();
         choiceInput.push(userInp);
         APIcall(userInp);
@@ -60,12 +58,12 @@ $("#gifs-col").on("click", ".gif", function(){
     }
 });
 
-$(".button").on("click", function(){
+$(document).on("click", ".button", function(){
     $("#gifs-col").empty();
     var d = $(this).attr("data-name");
     choiceInput.push(d);
     console.log("D IS:",d);
-    APIcall();
+    APIcall(d);
 });
 
 });//closes document.ready
